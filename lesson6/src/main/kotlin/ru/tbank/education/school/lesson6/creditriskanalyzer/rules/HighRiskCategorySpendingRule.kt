@@ -39,8 +39,8 @@ class HighRiskCategorySpendingRule(
             }
         }
         var PartOfRiskTransaction = 0
-        if(summTransactionSafeCategory + summTransactionRiskCategory > 0L) {
-            var PartOfRiskTransaction = summTransactionRiskCategory / (summTransactionSafeCategory + summTransactionRiskCategory)
+        if(summTransactionSafeCategory + summTransactionRiskCategory != 0L) {
+            PartOfRiskTransaction = summTransactionRiskCategory / (summTransactionSafeCategory + summTransactionRiskCategory)
         }
         val risk = when{
             (summTransactionRiskCategory + summTransactionSafeCategory) == 0L -> PaymentRisk.LOW
