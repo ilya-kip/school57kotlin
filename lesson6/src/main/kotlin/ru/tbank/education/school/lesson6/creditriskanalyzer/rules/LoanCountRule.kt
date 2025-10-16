@@ -15,8 +15,8 @@ import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.Overdue
  * - Если таких кредитов нет → LOW
  */
 class LoanCountRule(
-    private val loanRepo: LoanRepository,
-    private val overdueRepo: OverdueRepository
+    private val loanRepository: LoanRepository,
+    private val overdueRepository: OverdueRepository
 ) : ScoringRule {
 
 
@@ -24,9 +24,9 @@ class LoanCountRule(
 
     override fun evaluate(client: Client): ScoringResult {
         var OpenOverdueLoanCount = 0
-        for(it1 in loanRepo.getLoans(client.id)) {
+        for(it1 in loanRepository.getLoans(client.id)) {
             if(it1.isClosed == false){
-                for(it2 in overdueRepo.getOverdues(client.id)){
+                for(it2 in overdueRepository.getOverdues(client.id)){
                     if(it2.loanId == it1.id && it2.daysOverdue > 30){
                         OpenOverdueLoanCount++
                     }
