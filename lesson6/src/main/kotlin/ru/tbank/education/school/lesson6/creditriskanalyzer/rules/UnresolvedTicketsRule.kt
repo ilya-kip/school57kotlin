@@ -34,7 +34,7 @@ class UnresolvedTicketsRule(
             TicketsCount++
         }
         var part = 0
-        if(TicketsCount != 0){
+        if(TicketsCount != 0) {
             part = UnsolvedTicketsCount / TicketsCount
         }
         val risk = when{
