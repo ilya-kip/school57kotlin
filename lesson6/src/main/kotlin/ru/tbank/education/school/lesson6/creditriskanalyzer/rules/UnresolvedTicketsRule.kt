@@ -39,7 +39,7 @@ class UnresolvedTicketsRule(
         }
         val risk = when{
             part > 0.5 -> PaymentRisk.HIGH
-            part > 0.2 -> PaymentRisk.MEDIUM
+            part >= 0.2 -> PaymentRisk.MEDIUM
             else -> PaymentRisk.LOW
         }
         return ScoringResult(
