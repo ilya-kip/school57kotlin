@@ -41,7 +41,7 @@ class LoanDebtRatioRule(
         }
         val risk = when{
             summOpenLoan > 3 * summBalance -> PaymentRisk.HIGH
-            summOpenLoan > summBalance && summOpenLoan < 2 * summBalance -> PaymentRisk.MEDIUM
+            summOpenLoan > summBalance -> PaymentRisk.MEDIUM
             else -> PaymentRisk.LOW
         }
         return ScoringResult(
