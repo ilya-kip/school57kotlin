@@ -39,5 +39,9 @@ class UnresolvedTicketsRule(
             part > 0.2 -> PaymentRisk.MEDIUM
             else -> PaymentRisk.LOW
         }
+        return ScoringResult(
+            ruleName,
+            risk
+        )
     }
 }
