@@ -38,7 +38,7 @@ class HighRiskCategorySpendingRule(
                 summTransactionSafeCategory += it.amount
             }
         }
-        var PartOfRiskTransaction = 0
+        var PartOfRiskTransaction = 0L
         if(summTransactionSafeCategory + summTransactionRiskCategory != 0L) {
             PartOfRiskTransaction = summTransactionRiskCategory / (summTransactionSafeCategory + summTransactionRiskCategory)
         }
