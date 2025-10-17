@@ -33,14 +33,13 @@ class UnresolvedTicketsRule(
             }
             TicketsCount++
         }
-        var part = 0
+        var part = 0.toDouble()
         if(TicketsCount != 0) {
-            part = UnsolvedTicketsCount / TicketsCount
+            part = UnsolvedTicketsCount.toDouble() / TicketsCount.toDouble()
         }
         val risk = when{
-            TicketsCount == 0 -> PaymentRisk.LOW
             part > 0.5 -> PaymentRisk.HIGH
-            part >= 0.2 -> PaymentRisk.MEDIUM
+            part > 0.2 -> PaymentRisk.MEDIUM
             else -> PaymentRisk.LOW
         }
         return ScoringResult(
