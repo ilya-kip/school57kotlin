@@ -1,7 +1,9 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.TransactionCategory
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
 
 /**
@@ -26,6 +28,29 @@ class HighRiskCategorySpendingRule(
     override val ruleName: String = "High-Risk Category Spending"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        var summTransactionRiskCategory = 0L
+        var summTransactionSafeCategory = 0L
+        for(it in transactionRepo.getTransactions(client.id)){
+            if(it.category == TransactionCategory.GAMBLING || it.category == TransactionCategory.CRYPTO || it.category == TransactionCategory.TRANSFER){
+                summTransactionRiskCategory += it.amount
+            }
+            else{
+                summTransactionSafeCategory += it.amount
+            }
+        }
+        var PartOfRiskTransaction : Double = 0.toDouble()
+        if(summTransactionSafeCategory + summTransactionRiskCategory != 0L) {
+            PartOfRiskTransaction = summTransactionRiskCategory.toDouble() / (summTransactionSafeCategory.toDouble() + summTransactionRiskCategory.toDouble())
+        }
+        val risk = when{
+            (summTransactionRiskCategory + summTransactionSafeCategory) == 0L -> PaymentRisk.LOW
+            PartOfRiskTransaction > 0.6 -> PaymentRisk.HIGH
+            PartOfRiskTransaction >= 0.3 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult(
+            ruleName,
+            risk
+        )
     }
 }
