@@ -2,26 +2,33 @@ package ru.tbank.education.school.lesson2
 
 object DemoList {
     fun createList(): List<Int> {
-        TODO()
+        val rndlist : List<Int> = listOf((1..100).random(), (1..100).random(), (1..100).random(), (1..100).random(), (1..100).random())
+        return rndlist
     }
 
-    fun sumList(): Int {
-        TODO()
+    fun sumList(list : List<Int>): Int {
+        val sum = list.reduce { acc, i -> acc + i }
+        return sum
     }
 
-    fun sumEvenList(): Int {
-        TODO()
+    fun sumEvenList(list : List<Int>): Int {
+        val list1 = list.filter { it % 2 == 0 }
+        val sum = list1.reduce { acc, i -> acc + i }
+        return sum
     }
 
-    fun multiplyList(): List<Int> {
-        TODO()
+    fun multiplyList(list : List<Int>): List<Int> {
+        val list1 = list.map { it * 2 }
+        return list1
     }
 
-    fun maxElement(): Int {
-        TODO()
+    fun maxElement(list : List<Int>): Int {
+        val list1 = list.sorted()
+        return list1.last()
     }
 
-    fun sortDesc(): List<Int> {
-        TODO()
+    fun sortDesc(list : List<Int>): List<Int> {
+        val list1 = list.sortedDescending()
+        return list1
     }
 }
