@@ -54,7 +54,20 @@ val data: Map<String, Map<String, Map<String, Map<String, Set<Int>>>>> = mapOf(
 )
 
 fun main() {
-
+    for((city, mapcity) in data){
+        for ((okr, mapokr) in mapcity) {
+            for ((rai, maprai) in mapokr) {
+                for ((street, numbers) in maprai) {
+                    val c = numbers.max()
+                    for(i in 1..c){
+                        if(!numbers.contains(i)){
+                            println("$city, $okr, $rai, $street, $i")
+                        }
+                    }
+                }
+            }
+        }
+    }
     // все пропущенные дома, в формате 'город, округ, район, улица, номера дома'
 
 
